@@ -1,11 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard Profesor
+    </title>
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="../css/profesores.css"
+    >
+
 </head>
+
 <body>
-    <p>Profesor</p>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>
+            Tutorías
+        </h2>
+
+        <ul>
+
+            <li class="active">
+                🏠 Inicio
+            </li>
+
+            <li>
+                📚 Solicitudes
+            </li>
+
+            <li>
+                📅 Horarios
+            </li>
+
+            <li>
+                👤 Perfil
+            </li>
+
+            <li id="logout">
+                🚪 Cerrar sesión
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main>
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1 id="bienvenida">
+                    Bienvenido
+                </h1>
+
+                <p>
+                    Panel de Profesor
+                </p>
+
+            </div>
+
+            <div class="user-info">
+
+                <div class="avatar">
+
+                    <img
+                        id="avatarImg"
+                        src=""
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARDS -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <h3>
+                    Pendientes
+                </h3>
+
+                <p id="pendientesCount">
+                    0
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+                    Aprobadas
+                </h3>
+
+                <p id="aprobadasCount">
+                    0
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+                    Finalizadas
+                </h3>
+
+                <p id="finalizadasCount">
+                    0
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <h2>
+                    Solicitudes de Tutorías
+                </h2>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Estudiante
+                        </th>
+
+                        <th>
+                            Materia
+                        </th>
+
+                        <th>
+                            Fecha
+                        </th>
+
+                        <th>
+                            Hora
+                        </th>
+
+                        <th>
+                            Estado
+                        </th>
+
+                        <th>
+                            Acciones
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaTutorias">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="../js/profesores.js"></script>
+
 </body>
+
 </html>
