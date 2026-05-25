@@ -1,0 +1,26 @@
+{
+  "estudiantes":[
+
+    {
+      "id":1,
+      "usuarioId":1,
+      "nombre":"Keyser Carrion",
+      "cedula":"1350705834",
+      "carrera":"Software",
+      "paralelo":"4A",
+      "materias":[1,2,3],
+      "foto":"../assets/images/keyser.jpeg"
+    },
+
+    {
+      "id":2,
+      "usuarioId":3,
+      "nombre":"Maria Zambrano",
+      "cedula":"1309876543",
+      "carrera":"Tenología de la Información",
+      "paralelo":"5A",
+      "materias":[1,3]
+    }
+
+  ]
+}

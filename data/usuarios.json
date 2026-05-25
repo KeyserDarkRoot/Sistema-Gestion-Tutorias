@@ -1,0 +1,21 @@
+{
+  "usuarios":[
+
+    {
+      "id":1,
+      "nombre":"Keyser Carrion",
+      "correo":"e1350705834@live.uleam.edu.ec",
+      "password":"12345",
+      "rol":"estudiante"
+    },
+
+    {
+      "id":2,
+      "nombre":"Patricia Quiroz",
+      "correo":"ppatriciaquiroz@live.uleam.edu.ec",
+      "password":"12345",
+      "rol":"profesor"
+    }
+
+  ]
+}

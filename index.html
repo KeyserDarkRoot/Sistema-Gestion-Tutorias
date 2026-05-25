@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Tutorías ULEAM</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+
+        <div class="nav-left">
+
+            
+            <div class="logo">
+
+                <img
+                    src="assets/images/logo-uleam.png"
+                    alt="Logo ULEAM"
+                >
+
+            </div>
+
+
+            <div class="home-btn">
+                Página Principal
+            </div>
+
+        </div>
+
+        <div class="nav-right">
+            Acceder
+        </div>
+
+    </nav>
+
+    <!-- LOGIN -->
+    <main>
+
+        <div class="login-container">
+
+            <h1>
+                Entrar al Sistema de Tutorías - ULEAM
+            </h1>
+
+            <form id="loginForm">
+
+                <input
+                    type="email"
+                    id="correo"
+                    placeholder="Correo institucional"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Contraseña"
+                    required
+                >
+
+                <button type="submit">
+                    Acceder
+                </button>
+
+                <p id="mensajeError"></p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "horarios":[
+
+    {
+      "profesorId":1,
+
+      "dias":[
+        "Lunes",
+        "Miércoles",
+        "Viernes"
+      ],
+
+      "horas":[
+        "08:00",
+        "10:00",
+        "14:00"
+      ]
+    }
+
+  ]
+}

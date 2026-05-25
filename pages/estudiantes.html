@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Estudiante</title>
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>
+            Tutorías
+        </h2>
+
+        <ul>
+
+            <li class="active">
+                Inicio
+            </li>
+
+            <li>
+                Mis Tutorías
+            </li>
+
+            <li>
+                Solicitar Tutoría
+            </li>
+
+            <li>
+                Calendario
+            </li>
+
+            <li>
+                Perfil
+            </li>
+
+            <li id="logout">
+                Cerrar sesión
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MODAL NUEVA TUTORIA -->
+
+<div class="modal" id="modalTutoria">
+
+    <div class="modal-content">
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <h2>
+                Nueva Tutoría
+            </h2>
+
+            <button id="cerrarModal">
+                ✖
+            </button>
+
+        </div>
+
+        <!-- FORM -->
+
+        <form id="formTutoria">
+
+            <!-- MATERIA -->
+
+            <div class="input-group">
+
+                <label>
+                    Materia
+                </label>
+
+                <select id="materia">
+
+                    <option value="">
+                        Seleccionar materia
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- PROFESOR -->
+
+            <div class="input-group">
+
+                <label>
+                    Profesor
+                </label>
+
+                <select id="profesor">
+
+                    <option value="">
+                        Seleccionar profesor
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- FECHA -->
+
+            <div class="input-group">
+
+                <label>
+                    Fecha
+                </label>
+
+                <select id="fecha">
+
+                    <option value="">
+                        Seleccionar fecha
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- HORA -->
+
+            <div class="input-group">
+
+                <label>
+                    Hora
+                </label>
+
+                <select id="hora">
+
+                    <option value="">
+                        Seleccionar hora
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- MODALIDAD -->
+
+            <div class="input-group">
+
+                <label>
+                    Modalidad
+                </label>
+
+                <select id="modalidad">
+
+                    <option>
+                        Virtual
+                    </option>
+
+                    <option>
+                        Presencial
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- MOTIVO -->
+
+            <div class="input-group">
+
+                <label>
+                    Motivo
+                </label>
+
+                <textarea
+                    id="motivo"
+                    rows="4"
+                ></textarea>
+
+            </div>
+
+            <!-- BOTON -->
+
+            <button
+                type="submit"
+                class="btn-submit"
+            >
+
+                Solicitar Tutoría
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <button id="menuToggle" class="menu-toggle">
+                ☰
+        </button>
+
+        <!-- NAVBAR -->
+
+        <div class="topbar">
+            
+
+            <div>
+
+                <h1 id="bienvenida">
+                    Bienvenido al SGT
+                </h1>
+
+                <p>
+                    Sistema de Gestión de Tutorías
+                </p>
+
+            </div>
+
+            <div class="user-info">
+
+                <div class="user-text">
+
+                    <h3 id="nombreUsuario">
+                        Usuario
+                    </h3>
+
+                    <p>
+                        Estudiante ULEAM
+                    </p>
+
+                </div>
+
+                <div class="avatar">
+
+                    <img
+                        id="avatarImg"
+                        src=""
+                        alt="Avatar Usuario"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARDS -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <h3>
+                    Tutorías Pendientes
+                </h3>
+
+                <p>
+                    3
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+                    Tutorías Aprobadas
+                </h3>
+
+                <p>
+                    5
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>
+                    Tutorías Finalizadas
+                </h3>
+
+                <p>
+                    12
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <h2>
+                    Próximas Tutorías
+                </h2>
+
+                <button id="abrirModal">
+                    + Nueva Tutoría
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Profesor</th>
+                        <th>Materia</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaTutorias">
+
+                    <tr>
+
+                        <td>Carlos Mendoza</td>
+                        <td>Programación</td>
+                        <td>24/05/2026</td>
+                        <td>10:00 AM</td>
+
+                        <td>
+                            <span class="status pending">
+                                Pendiente
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Ana Zambrano</td>
+                        <td>Base de Datos</td>
+                        <td>26/05/2026</td>
+                        <td>02:00 PM</td>
+
+                        <td>
+                            <span class="status approved">
+                                Aprobada
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="../js/estudiantes.js"></script>
+
+</body>
+
+</html>

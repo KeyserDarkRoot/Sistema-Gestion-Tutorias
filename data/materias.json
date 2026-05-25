@@ -1,0 +1,20 @@
+{
+  "materias":[
+
+    {
+      "id":1,
+      "nombre":"Programación Web"
+    },
+
+    {
+      "id":2,
+      "nombre":"Base de Datos"
+    },
+
+    {
+      "id":3,
+      "nombre":"Inteligencia Artificial"
+    }
+
+  ]
+}

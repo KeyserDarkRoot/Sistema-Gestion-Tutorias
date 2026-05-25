@@ -1,0 +1,17 @@
+{
+  "paralelos":[
+
+    {
+      "id":1,
+      "nombre":"4A",
+      "carrera":"Software"
+    },
+
+    {
+      "id":2,
+      "nombre":"4B",
+      "carrera":"Tecnología de la Información"
+    }
+
+  ]
+}

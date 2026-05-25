@@ -1,0 +1,22 @@
+{
+  "profesores":[
+
+    {
+      "id":1,
+
+      "usuarioId":2,
+
+      "nombre":"Patricia Quiroz",
+
+      "materias":[1,2],
+
+      "paralelos":[
+        "5A",
+        "5B"
+      ],
+
+      "foto":"../assets/images/patricia.jpg"
+    }
+
+  ]
+}

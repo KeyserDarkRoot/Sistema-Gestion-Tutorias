@@ -1,0 +1,27 @@
+{
+  "tutorias":[
+
+    {
+      "id":1,
+
+      "estudianteId":1,
+
+      "profesorId":1,
+
+      "profesor":"Patricia Quiroz",
+
+      "materia":"Programación Web",
+
+      "fecha":"2026-05-28",
+
+      "hora":"08:00",
+
+      "modalidad":"Virtual",
+
+      "motivo":"Refuerzo de JavaScript",
+
+      "estado":"Pendiente"
+    }
+
+  ]
+}

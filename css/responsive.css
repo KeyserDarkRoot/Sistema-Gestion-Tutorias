@@ -1,0 +1,224 @@
+/* =========================
+   MENU TOGGLE
+========================= */
+
+.menu-toggle{
+
+    display:none;
+
+    position:fixed;
+
+    top:20px;
+    left:20px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    z-index:2000;
+
+    box-shadow:
+    0 10px 20px rgba(37,99,235,0.3);
+}
+
+/* =========================
+   LAPTOP PEQUEÑA
+========================= */
+
+@media(max-width:1200px){
+
+    .cards{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        width:90px;
+        padding:20px 10px;
+    }
+
+    .sidebar h2,
+    .logo-text{
+
+        display:none;
+    }
+
+    .sidebar li{
+
+        justify-content:center;
+        font-size:13px;
+    }
+
+    main{
+
+        margin-left:90px;
+        width:calc(100% - 90px);
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:768px){
+
+    /* BOTON */
+
+    .menu-toggle{
+        display:block;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar{
+
+        width:280px;
+
+        transform:
+        translateX(-100%);
+
+        transition:0.3s;
+
+        z-index:1500;
+    }
+
+    /* SIDEBAR ACTIVA */
+
+    .sidebar.active{
+
+        transform:
+        translateX(0);
+    }
+
+    /* MAIN */
+
+    main{
+
+        margin-left:0;
+        width:100%;
+
+        padding:90px 20px 20px;
+    }
+
+    /* TOPBAR */
+
+    .topbar{
+
+        flex-direction:column;
+        align-items:flex-start;
+
+        gap:20px;
+    }
+
+    .topbar h1{
+
+        font-size:28px;
+    }
+
+    /* USER */
+
+    .user-info{
+
+        width:100%;
+
+        justify-content:space-between;
+    }
+
+    /* CARDS */
+
+    .cards{
+
+        grid-template-columns:1fr;
+    }
+
+    .card{
+
+        padding:25px;
+    }
+
+    .card p{
+
+        font-size:38px;
+    }
+
+    /* TABLA */
+
+    .table-section{
+
+        overflow-x:auto;
+
+        padding:20px;
+    }
+
+    table{
+
+        min-width:700px;
+    }
+
+    /* BOTON TABLA */
+
+    .table-header{
+
+        flex-direction:column;
+        align-items:flex-start;
+
+        gap:15px;
+    }
+
+}
+
+/* =========================
+   CELULARES PEQUEÑOS
+========================= */
+
+@media(max-width:480px){
+
+    .topbar h1{
+
+        font-size:24px;
+    }
+
+    .card{
+
+        border-radius:22px;
+    }
+
+    .table-section{
+
+        border-radius:22px;
+    }
+
+    .avatar{
+
+        width:55px;
+        height:55px;
+    }
+
+}
