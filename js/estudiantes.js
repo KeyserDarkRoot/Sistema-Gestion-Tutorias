@@ -7,6 +7,15 @@ document.getElementById("hora");
 const fechaSelect =
 document.getElementById("fecha");
 
+const pendientesCount =
+document.getElementById("pendientesCount");
+
+const aprobadasCount =
+document.getElementById("aprobadasCount");
+
+const finalizadasCount =
+document.getElementById("finalizadasCount");
+
 let horariosData = [];
 
 // VALIDAR SESIÓN
@@ -670,6 +679,57 @@ function renderTutorias(){
 
 }
 
+
+// =========================
+// ACTUALIZAR CARDS
+// =========================
+
+function actualizarCards(){
+
+    // FILTRAR DEL ESTUDIANTE
+
+    const tutoriasEstudiante =
+    tutorias.filter(t =>
+
+        t.estudianteId === usuario.id
+    );
+
+    // PENDIENTES
+
+    const pendientes =
+    tutoriasEstudiante.filter(t =>
+
+        t.estado === "Pendiente"
+    ).length;
+
+    // APROBADAS
+
+    const aprobadas =
+    tutoriasEstudiante.filter(t =>
+
+        t.estado === "Aprobada"
+    ).length;
+
+    // FINALIZADAS
+
+    const finalizadas =
+    tutoriasEstudiante.filter(t =>
+
+        t.estado === "Finalizada"
+    ).length;
+
+    // MOSTRAR
+
+    pendientesCount.textContent =
+    pendientes;
+
+    aprobadasCount.textContent =
+    aprobadas;
+
+    finalizadasCount.textContent =
+    finalizadas;
+
+}
 // =========================
 // INICIAR
 // =========================
@@ -677,3 +737,5 @@ function renderTutorias(){
 cargarTutorias();
 
 renderTutorias();
+
+actualizarCards();
