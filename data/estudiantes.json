@@ -15,11 +15,12 @@
     {
       "id":2,
       "usuarioId":3,
-      "nombre":"Maria Zambrano",
-      "cedula":"1309876543",
-      "carrera":"Tenología de la Información",
+      "nombre":"Bryan Chiquito",
+      "cedula":"1360395683",
+      "carrera":"Software",
       "paralelo":"5A",
-      "materias":[1,3]
+      "materias":[1,3],
+      "foto" :"../assets/images/logo-uleam.png"
     }
 
   ]

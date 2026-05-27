@@ -15,6 +15,14 @@
       "correo":"ppatriciaquiroz@live.uleam.edu.ec",
       "password":"12345",
       "rol":"profesor"
+    },
+
+    {
+      "id":3,
+      "nombre":"Bryan Chiquito",
+      "correo":"e1360395683@live.uleam.edu.ec",
+      "password":"12345",
+      "rol":"estudiante"
     }
 
   ]
