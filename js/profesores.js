@@ -47,13 +47,26 @@ document.getElementById(
     "finalizadasCount"
 );
 
+
+const menuToggle =
+document.getElementById("menuToggle");
+
+const sidebar =
+document.querySelector(".sidebar");
+
+menuToggle.addEventListener("click", ()=>{
+
+    sidebar.classList.toggle("active");
+
+});
+
 // MOSTRAR DATOS
 
 bienvenida.textContent =
 `Bienvenido, ${usuario.nombre}`;
 
 avatarImg.src =
-usuario.foto;
+"../assets/images/patricia.jpg";
 
 // LOGOUT
 
@@ -257,6 +270,9 @@ function actualizarCards(){
     finalizadas;
 
 }
+
+
+
 
 // INICIAR
 

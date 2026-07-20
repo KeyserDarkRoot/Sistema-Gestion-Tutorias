@@ -16,7 +16,6 @@ document.getElementById("aprobadasCount");
 const finalizadasCount =
 document.getElementById("finalizadasCount");
 
-let horariosData = [];
 
 // VALIDAR SESIÓN
 
@@ -48,7 +47,7 @@ usuario.nombre;
 // FOTO DINÁMICA
 
 avatarImg.src =
-usuario.foto;
+"../assets/images/keyser.jpeg";
 
 // LOGOUT
 
@@ -63,6 +62,75 @@ document.getElementById("logout")
     "../index.html";
 
 });
+
+async function cargarPerfilEstudiante(){
+
+
+    console.log(
+        "Usuario sesión:",
+        usuario
+    );
+
+
+    const usuarioId =
+    usuario.id;
+
+
+
+    const {data,error}=await supabaseClient
+    .from("estudiantes")
+    .select("*")
+    .eq(
+        "usuario_id",
+        usuarioId
+    );
+
+
+
+    console.log(
+        "Respuesta estudiantes:",
+        data,
+        error
+    );
+
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+        return;
+
+    }
+
+
+
+    if(!data || data.length===0){
+
+        console.error(
+            "No existe estudiante con usuario_id:",
+            usuarioId
+        );
+
+        return;
+
+    }
+
+
+
+    perfilEstudiante =
+    data[0];
+
+
+    console.log(
+        "Perfil estudiante cargado:",
+        perfilEstudiante
+    );
+
+
+}
 
 // MENU RESPONSIVE
 
@@ -91,6 +159,8 @@ document.getElementById("modalTutoria");
 
 const abrirModal =
 document.getElementById("abrirModal");
+
+
 
 const cerrarModal =
 document.getElementById("cerrarModal");
@@ -123,6 +193,7 @@ window.addEventListener("click",(e)=>{
 
 });
 
+
 // =========================
 // SELECTS
 // =========================
@@ -137,7 +208,11 @@ document.getElementById("profesor");
 
 let materiasData = [];
 let profesoresData = [];
+let horariosData = [];
+
 let tutorias = [];
+
+let perfilEstudiante = null;
 
 // =========================
 // CARGAR TUTORIAS
@@ -172,42 +247,35 @@ function cargarTutorias(){
 
 async function cargarDatosModal(){
 
-    // HORARIOS
 
-    const horariosResponse =
-    await fetch("../data/horarios.json");
+    // CARGAR MATERIAS
 
-    const horariosJson =
-    await horariosResponse.json();
+    const {data:materias,error:materiaError}=
 
-    horariosData =
-    horariosJson.horarios;
+    await supabaseClient
+    .from("materias")
+    .select("*")
+    .eq("estado",true);
 
-    // MATERIAS
 
-    const materiasResponse =
-    await fetch("../data/materias.json");
 
-    const materiasJson =
-    await materiasResponse.json();
+    if(materiaError){
 
-    materiasData =
-    materiasJson.materias;
+        console.error(
+            materiaError
+        );
 
-    // PROFESORES
+        return;
 
-    const profesoresResponse =
-    await fetch("../data/profesores.json");
+    }
 
-    const profesoresJson =
-    await profesoresResponse.json();
 
-    profesoresData =
-    profesoresJson.profesores;
 
-    // LIMPIAR
+    materiasData=materias;
 
-    materiaSelect.innerHTML = `
+
+
+    materiaSelect.innerHTML=`
 
         <option value="">
             Seleccionar materia
@@ -215,32 +283,60 @@ async function cargarDatosModal(){
 
     `;
 
-    // RECORRER MATERIAS
 
-    usuario.materias.forEach(idMateria => {
 
-        const materia =
-        materiasData.find(m =>
+    materiasData.forEach(materia=>{
 
-            m.id === idMateria
-        );
 
-        if(materia){
+        const option =
+        document.createElement("option");
 
-            const option =
-            document.createElement("option");
 
-            option.value =
-            materia.id;
+        option.value =
+        materia.id;
 
-            option.textContent =
-            materia.nombre;
 
-            materiaSelect.appendChild(option);
+        option.textContent =
+        materia.nombre;
 
-        }
+
+        materiaSelect.appendChild(option);
+
 
     });
+
+
+    // =========================
+    // CARGAR PROFESORES
+    // =========================
+
+    const { data: profesores, error: profesorError } =
+    await supabaseClient
+    .from("profesores")
+    .select(`
+        id,
+        usuario_id,
+        usuarios (
+            nombre
+        )
+    `);
+
+    if(profesorError){
+
+        console.error(profesorError);
+
+        return;
+
+    }
+
+    profesoresData = profesores;
+
+    profesorSelect.innerHTML = `
+        <option value="">
+            Seleccionar profesor
+        </option>
+    `;
+
 
 }
 
@@ -252,14 +348,55 @@ cargarDatosModal();
 // FILTRAR PROFESORES
 // =========================
 
-materiaSelect.addEventListener("change", ()=>{
+
+
+materiaSelect.addEventListener(
+"change",
+async()=>{
+
 
     const materiaId =
-    parseInt(materiaSelect.value);
+    parseInt(
+        materiaSelect.value
+    );
 
-    // LIMPIAR
 
-    profesorSelect.innerHTML = `
+    if(!materiaId)
+        return;
+
+
+
+    const {data,error}=
+
+    await supabaseClient
+    .from("profesor_materia")
+    .select(`
+        profesor_id,
+        profesores(
+            id,
+            usuarios(
+                nombre
+            )
+        )
+    `)
+    .eq(
+        "materia_id",
+        materiaId
+    );
+
+
+
+    if(error){
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+
+    profesorSelect.innerHTML=`
 
         <option value="">
             Seleccionar profesor
@@ -267,32 +404,33 @@ materiaSelect.addEventListener("change", ()=>{
 
     `;
 
-    // FILTRAR
 
-    const profesoresFiltrados =
-    profesoresData.filter(profesor =>
 
-        profesor.materias.includes(
-            materiaId
-        )
-    );
+    profesoresData=data;
 
-    // RECORRER
 
-    profesoresFiltrados.forEach(profesor => {
+
+    data.forEach(item=>{
+
 
         const option =
         document.createElement("option");
 
+
         option.value =
-        profesor.id;
+        item.profesores.id;
+
 
         option.textContent =
-        profesor.nombre;
+        item.profesores.usuarios.nombre;
+
+
 
         profesorSelect.appendChild(option);
 
+
     });
+
 
 });
 
@@ -300,63 +438,64 @@ materiaSelect.addEventListener("change", ()=>{
 // HORARIOS Y FECHAS
 // =========================
 
-profesorSelect.addEventListener("change", ()=>{
+profesorSelect.addEventListener(
+"change",
+async()=>{
+
 
     const profesorId =
-    parseInt(profesorSelect.value);
-
-    // BUSCAR HORARIO
-
-    const horarioProfesor =
-    horariosData.find(h =>
-
-        h.profesorId === profesorId
+    parseInt(
+        profesorSelect.value
     );
 
-    // LIMPIAR HORAS
 
-    horaSelect.innerHTML = `
+    if(!profesorId)
+        return;
 
-        <option value="">
-            Seleccionar hora
-        </option>
 
-    `;
 
-    // LIMPIAR FECHAS
+    const {data,error}=
+
+    await supabaseClient
+    .from("horarios_profesor")
+    .select("*")
+    .eq(
+        "profesor_id",
+        profesorId
+    )
+    .eq(
+        "estado",
+        true
+    );
+
+
+
+    if(error){
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+
+    horariosData=data;
+
+    // =========================
+    // GENERAR FECHAS DISPONIBLES
+    // =========================
+
 
     fechaSelect.innerHTML = `
 
-        <option value="">
-            Seleccionar fecha
-        </option>
+    <option value="">
+    Seleccionar fecha
+    </option>
 
     `;
 
-    // VALIDAR
 
-    if(!horarioProfesor) return;
-
-    // =========================
-    // HORAS
-    // =========================
-
-    horarioProfesor.horas.forEach(hora => {
-
-        const option =
-        document.createElement("option");
-
-        option.value = hora;
-
-        option.textContent = hora;
-
-        horaSelect.appendChild(option);
-
-    });
-
-    // =========================
-    // FECHAS
-    // =========================
 
     const diasSemana = {
 
@@ -367,96 +506,112 @@ profesorSelect.addEventListener("change", ()=>{
         "Jueves":4,
         "Viernes":5,
         "Sábado":6
+
     };
 
-    const meses = [
 
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre"
-    ];
 
     const hoy = new Date();
 
-    // GENERAR 30 DÍAS
+
 
     for(let i = 0; i < 30; i++){
+
 
         const fecha =
         new Date();
 
+
         fecha.setDate(
-            hoy.getDate() + i
+            hoy.getDate()+i
         );
+
 
         const diaNumero =
         fecha.getDay();
 
+
+
         const nombreDia =
         Object.keys(diasSemana)
-        .find(key =>
-
-            diasSemana[key] === diaNumero
+        .find(dia =>
+            diasSemana[dia] === diaNumero
         );
 
-        // VALIDAR DÍA
 
-        if(
-            horarioProfesor.dias.includes(
-                nombreDia
-            )
-        ){
 
-            const dia =
-            fecha.getDate();
+        const existeHorario =
+        horariosData.some(horario =>
+            horario.dia === nombreDia
+        );
 
-            const mes =
-            meses[fecha.getMonth()];
 
-            const anio =
-            fecha.getFullYear();
 
-            // TEXTO
+        if(existeHorario){
 
-            const textoFecha =
-`${nombreDia} ${dia} de ${mes}`;
-
-            // VALUE
-
-            const fechaValue =
-`${anio}-${String(
-fecha.getMonth()+1
-).padStart(2,"0")}-${String(
-dia
-).padStart(2,"0")}`;
-
-            // OPTION
 
             const option =
             document.createElement("option");
 
+
+            const fechaTexto =
+            `${nombreDia} ${fecha.getDate()}/${fecha.getMonth()+1}/${fecha.getFullYear()}`;
+
+
             option.value =
-            fechaValue;
+            fecha.toISOString()
+            .split("T")[0];
+
 
             option.textContent =
-            textoFecha;
+            fechaTexto;
+
+
 
             fechaSelect.appendChild(option);
 
+    
         }
+
+
 
     }
 
+    console.log("HORARIOS:", horariosData);
+
+
+
+
+
+    horariosData.forEach(horario=>{
+
+
+        const option =
+        document.createElement("option");
+
+
+        option.value =
+        horario.hora_inicio;
+
+
+        option.textContent =
+        horario.hora_inicio+
+        " - "+
+        horario.hora_fin;
+
+
+        horaSelect.appendChild(option);
+        
+
+
+
+    });
+
+
+
 });
+
+
 
 // =========================
 // FORM TUTORIA
@@ -527,6 +682,18 @@ formTutoria.addEventListener("submit",(e)=>{
 
         p.id === profesorId
     );
+
+
+    if(!profesor){
+
+        alert("Profesor no encontrado");
+
+        return;
+
+    }
+
+    console.log("MATERIA:", materia);
+    console.log("PROFESOR:", profesor);
 
     // CREAR TUTORIA
 
@@ -734,8 +901,19 @@ function actualizarCards(){
 // INICIAR
 // =========================
 
-cargarTutorias();
+async function iniciar(){
 
-renderTutorias();
+    await cargarPerfilEstudiante();
 
-actualizarCards();
+    await cargarDatosModal();
+
+    cargarTutorias();
+
+    renderTutorias();
+
+    actualizarCards();
+
+}
+
+
+iniciar();

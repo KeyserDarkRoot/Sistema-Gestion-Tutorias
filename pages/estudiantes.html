@@ -23,37 +23,69 @@
 
     <aside class="sidebar">
 
-        <h2>
-            Tutorías
-        </h2>
+        
+        <!-- MENÚ -->
 
-        <ul>
+        <nav>
 
-            <li class="active">
-                Inicio
-            </li>
+            <ul>
 
-            <li>
-                Mis Tutorías
-            </li>
+                <li class="active">
 
-            <li>
-                Solicitar Tutoría
-            </li>
+                    <span></span>
 
-            <li>
-                Calendario
-            </li>
+                    Inicio
 
-            <li>
-                Perfil
-            </li>
+                </li>
 
-            <li id="logout">
+                <li>
+
+                    <span></span>
+
+                    Mis Tutorías
+
+                </li>
+
+                <li>
+
+                    <span></span>
+
+                    Nueva Tutoría
+
+                </li>
+
+                <li>
+
+                    <span></span>
+
+                    Calendario
+
+                </li>
+
+                <li>
+
+                    <span></span>
+
+                    Mi Perfil
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- FOOTER -->
+
+        <div class="sidebar-footer">
+
+            <button id="logout">
+
+                
                 Cerrar sesión
-            </li>
 
-        </ul>
+            </button>
+
+        </div>
 
     </aside>
 
@@ -331,35 +363,6 @@
 
                 <tbody id="tablaTutorias">
 
-                    <tr>
-
-                        <td>Carlos Mendoza</td>
-                        <td>Programación</td>
-                        <td>24/05/2026</td>
-                        <td>10:00 AM</td>
-
-                        <td>
-                            <span class="status pending">
-                                Pendiente
-                            </span>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Ana Zambrano</td>
-                        <td>Base de Datos</td>
-                        <td>26/05/2026</td>
-                        <td>02:00 PM</td>
-
-                        <td>
-                            <span class="status approved">
-                                Aprobada
-                            </span>
-                        </td>
-
-                    </tr>
 
                 </tbody>
 
@@ -368,6 +371,10 @@
         </section>
 
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase.js"></script>
 
     <script src="../js/estudiantes.js"></script>
 
